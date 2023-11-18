@@ -44,7 +44,7 @@ export default {
 }
 
 .timeline-container {
-  background: lightgray;
+  background: #e5e5e5;
 }
 
 .timeline-wrapper{
