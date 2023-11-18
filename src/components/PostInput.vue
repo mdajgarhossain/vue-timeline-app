@@ -6,6 +6,7 @@
       hide-details="auto"
       outlined
       dense
+      @keyup.enter="addPost"
     ></v-text-field>
     <v-btn @click="addPost" class="ml-4">Post</v-btn>
   </div>
@@ -20,12 +21,14 @@ export default {
   },
   methods: {
     addPost() {
-      this.$store.dispatch("addPost", {
-        id: Date.now(),
-        text: this.newPost,
-        date: new Date(),
-      });
-      this.newPost = "";
+      if (this.newPost.trim() !== "") {
+        this.$store.dispatch("addPost", {
+          id: Date.now(),
+          text: this.newPost,
+          date: new Date(),
+        });
+        this.newPost = "";
+      }
     },
   },
 };
