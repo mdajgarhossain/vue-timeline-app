@@ -12,12 +12,23 @@ export default new Vuex.Store({
     addPost(state, post) {
       state.timeline.unshift(post);
     },
+
+    addPosts(state, posts) {
+      state.timeline.unshift(...posts);
+    },
   },
+
   actions: {
     async addPost({ commit }, post) {
       // Async service call
       await new Promise(resolve => setTimeout(resolve, 1000));
       commit('addPost', post);
+    },
+
+    async addPosts({ commit }, posts) {
+      // Async service call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      commit('addPosts', posts);
     },
   },
 });
