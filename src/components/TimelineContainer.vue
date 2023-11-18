@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <pre>{{timeline}}</pre> -->
     <div v-for="post in timeline" :key="post.id" class="post">
       {{ post.text }}
     </div>

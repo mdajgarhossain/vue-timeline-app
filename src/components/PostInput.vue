@@ -16,7 +16,6 @@ export default {
     addPost() {
       this.$store.dispatch('addPost', { id: Date.now(), text: this.newPost, date: new Date() });
       this.newPost = '';
-      // console.log("this.newPost", this.newPost );
     },
   },
 };
