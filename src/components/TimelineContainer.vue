@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <v-container class="timeline-container">
     <div class="text-center my-8">
       <h1>Our Company Milestone</h1>
     </div>
-    <v-timeline>
+    <v-timeline class="timeline-wrapper">
       <v-timeline-item v-for="post in timeline" :key="post.id">
         <v-card class="elevation-2">
           <v-card-title class="text-h5">
@@ -19,7 +19,7 @@
       </v-timeline-item>
     </v-timeline>
     <div v-if="loading" class="loading">Loading...</div>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -41,5 +41,14 @@ export default {
   margin: 10px;
   font-size: 25px;
   color: cornflowerblue;
+}
+
+.timeline-container {
+  background: lightgray;
+}
+
+.timeline-wrapper{
+  width: 850px;
+  margin: 10px auto;
 }
 </style>
