@@ -1,15 +1,16 @@
 <template>
-  <div>
-    <!-- <pre>{{timeline}}</pre> -->
-    <PostInput />
-    <TimelineContainer :timeline="timeline" :loading="loading" />
-  </div>
+  <v-app>
+    <v-container>
+      <PostInput />
+      <TimelineContainer :timeline="timeline" :loading="loading" />
+    </v-container>
+  </v-app>
 </template>
 
 <script>
-import PostInput from '@/components/PostInput.vue';
-import TimelineContainer from '@/components/TimelineContainer.vue';
-import { mapState } from 'vuex';
+import PostInput from "@/components/PostInput.vue";
+import TimelineContainer from "@/components/TimelineContainer.vue";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -18,7 +19,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['timeline']),
+    ...mapState(["timeline"]),
   },
 
   data() {
@@ -26,7 +27,7 @@ export default {
       loading: false,
     };
   },
-  
+
   // async created() {
   //   this.loading = true;
   //   this.$store.commit('addPost', await this.$services.timeline.fetchTimeline());
@@ -38,7 +39,7 @@ export default {
 
     // Fetch current posts from the service
     const currentPosts = await this.$services.timeline.fetchTimeline();
-    this.$store.dispatch('addPosts', currentPosts);
+    this.$store.dispatch("addPosts", currentPosts);
 
     this.loading = false;
   },

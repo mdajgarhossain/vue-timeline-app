@@ -1,7 +1,13 @@
 <template>
-  <div>
-    <input v-model="newPost" placeholder="Type your post..." />
-    <button @click="addPost">Post</button>
+  <div class="d-flex post-input-wrapper">
+    <v-text-field
+      placeholder="Type your post..."
+      v-model="newPost"
+      hide-details="auto"
+      outlined
+      dense
+    ></v-text-field>
+    <v-btn @click="addPost" class="ml-4">Post</v-btn>
   </div>
 </template>
 
@@ -9,14 +15,25 @@
 export default {
   data() {
     return {
-      newPost: '',
+      newPost: "",
     };
   },
   methods: {
     addPost() {
-      this.$store.dispatch('addPost', { id: Date.now(), text: this.newPost, date: new Date() });
-      this.newPost = '';
+      this.$store.dispatch("addPost", {
+        id: Date.now(),
+        text: this.newPost,
+        date: new Date(),
+      });
+      this.newPost = "";
     },
   },
 };
 </script>
+
+<style scoped>
+.post-input-wrapper {
+  width: 400px;
+  margin: 10px auto;
+}
+</style>
