@@ -6,15 +6,32 @@
     <v-timeline class="timeline-wrapper">
       <v-timeline-item v-for="post in timeline" :key="post.id">
         <v-card class="elevation-2">
-          <v-card-title class="text-h5">
-            {{ post.text }}
-          </v-card-title>
-          <v-card-text
-            >Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
-            scaevola imperdiet nec ut, sed euismod convenire principes at. Est
-            et nobis iisque percipit, an vim zril disputando voluptatibus, vix
-            an salutandi sententiae.</v-card-text
-          >
+          <v-row no-gutters>
+            <v-col>
+              <div>
+                <v-card-title class="text-h5">
+                  {{ post.text }}
+                </v-card-title>
+                <v-card-text
+                  >Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
+                  scaevola imperdiet nec ut.</v-card-text
+                >
+              </div>
+            </v-col>
+            <v-col cols="3" class="card-date">
+              <p class="pa-3">{{ formatDate(post.date) }}</p>
+            </v-col>
+          </v-row>
+          <!-- <div>
+            <v-card-title class="text-h5">
+              {{ post.text }}
+            </v-card-title>
+            <v-card-text
+              >Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
+              scaevola imperdiet nec ut.</v-card-text
+            >
+          </div>
+          <div class="card-date">{{post.date}}</div> -->
         </v-card>
       </v-timeline-item>
     </v-timeline>
@@ -26,6 +43,14 @@
 export default {
   name: "TimelineContainer",
   props: ["timeline", "loading"],
+
+  methods: {
+    formatDate(dateString) {
+      const options = { month: "short", day: "2-digit", year: "numeric" };
+      const date = new Date(dateString);
+      return date.toLocaleDateString("en-US", options);
+    },
+  },
 };
 </script>
 
@@ -47,8 +72,13 @@ export default {
   background: #e5e5e5;
 }
 
-.timeline-wrapper{
+.timeline-wrapper {
   width: 850px;
   margin: 10px auto;
+}
+
+.card-date {
+  border-left: 2px solid #e5e5e5;
+  font-size: 28px;
 }
 </style>
