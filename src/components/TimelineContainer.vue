@@ -14,7 +14,7 @@
                 </v-card-title>
                 <v-card-text
                   >Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
-                  scaevola imperdiet nec ut.</v-card-text
+                  scaevola.</v-card-text
                 >
               </div>
             </v-col>
@@ -22,16 +22,6 @@
               <p class="pa-3">{{ formatDate(post.date) }}</p>
             </v-col>
           </v-row>
-          <!-- <div>
-            <v-card-title class="text-h5">
-              {{ post.text }}
-            </v-card-title>
-            <v-card-text
-              >Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
-              scaevola imperdiet nec ut.</v-card-text
-            >
-          </div>
-          <div class="card-date">{{post.date}}</div> -->
         </v-card>
       </v-timeline-item>
     </v-timeline>
@@ -79,6 +69,6 @@ export default {
 
 .card-date {
   border-left: 2px solid #e5e5e5;
-  font-size: 28px;
+  font-size: 20px;
 }
 </style>
