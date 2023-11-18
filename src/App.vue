@@ -1,28 +1,30 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <PostInput />
+    <TimelineContainer :timeline="timeline" :loading="loading" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import PostInput from '@/components/PostInput.vue';
+import TimelineContainer from '@/components/TimelineContainer.vue';
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
-</script>
+    PostInput,
+    TimelineContainer,
+  },
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  data() {
+    return {
+      loading: false,
+    };
+  },
+
+  async created() {
+    this.loading = true;
+    this.$store.commit('addPost', await this.$services.timeline.fetchTimeline());
+    this.loading = false;
+  },
+};
+</script>
