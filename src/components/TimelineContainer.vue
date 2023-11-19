@@ -1,6 +1,6 @@
 <template>
   <v-container class="timeline-container">
-    <div class="text-center my-8">
+    <div class="text-center mt-5 mb-8">
       <h1>Our Company Milestone</h1>
     </div>
     <v-timeline class="timeline-wrapper">

@@ -36,7 +36,8 @@ export default {
 
 <style scoped>
 .post-input-wrapper {
-  width: 400px;
-  margin: 10px auto;
+  width: 500px;
+  margin: 20px auto 10px auto;
+
 }
 </style>
