@@ -6,6 +6,7 @@ export default {
       // Mock data
       { id: 1, text: 'First post', date: new Date() },
       { id: 2, text: 'Second post', date: new Date() },
+      { id: 3, text: 'Third post', date: new Date() },
     ];
   },
 };
