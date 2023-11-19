@@ -4,7 +4,7 @@
       <h1>Our Company Milestone</h1>
     </div>
     <v-timeline class="timeline-wrapper">
-      <v-timeline-item v-for="post in timeline" :key="post.id">
+      <v-timeline-item v-for="post in localTimeline" :key="post.id">
         <v-card class="elevation-2">
           <v-row no-gutters>
             <v-col>
@@ -24,8 +24,11 @@
           </v-row>
         </v-card>
       </v-timeline-item>
+      <div ref="lastItem"></div>
     </v-timeline>
+
     <div v-if="loading" class="loading">Loading...</div>
+    <div v-if="localLoading && !loading" class="loading">Loading more...</div>
   </v-container>
 </template>
 
@@ -33,6 +36,14 @@
 export default {
   name: "TimelineContainer",
   props: ["timeline", "loading"],
+  data() {
+    return {
+      localTimeline: [], // Local timeline data
+      localLoading: false, // Local loading state
+      observer: null,
+      itemsToLoad: 5, // Number of items to load at a time
+    };
+  },
 
   methods: {
     formatDate(dateString) {
@@ -40,6 +51,50 @@ export default {
       const date = new Date(dateString);
       return date.toLocaleDateString("en-US", options);
     },
+
+    loadMoreData() {
+      // Loading more data for demonstration
+      this.localLoading = true;
+      setTimeout(() => {
+        const startIndex = this.localTimeline.length;
+        const endIndex = startIndex + this.itemsToLoad;
+        const newData = this.timeline.slice(startIndex, endIndex);
+        this.localTimeline = [...this.localTimeline, ...newData];
+        this.localLoading = false;
+      }, 1000);
+    },
+    handleIntersection(entries) {
+      const lastEntry = entries[0];
+      if (lastEntry.isIntersecting) {
+        this.loadMoreData();
+      }
+    },
+  },
+
+  watch: {
+    timeline(newTimeline) {
+      // Update localTimeline when the prop changes
+      this.localTimeline = newTimeline.slice(0, this.itemsToLoad);
+    },
+    loading(newLoading) {
+      // Update localLoading when the prop changes
+      if (!newLoading) {
+        this.localLoading = false;
+      }
+    },
+  },
+
+  mounted() {
+    this.observer = new IntersectionObserver(this.handleIntersection, {
+      threshold: 0.5,
+    });
+    this.observer.observe(this.$refs.lastItem);
+  },
+
+  beforeDestroy() {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
   },
 };
 </script>
@@ -60,6 +115,8 @@ export default {
 
 .timeline-container {
   background: #e5e5e5;
+  margin-top: 20px;
+  min-height: 700px;
 }
 
 .timeline-wrapper {
