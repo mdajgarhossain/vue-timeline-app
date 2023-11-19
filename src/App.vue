@@ -28,12 +28,6 @@ export default {
     };
   },
 
-  // async created() {
-  //   this.loading = true;
-  //   this.$store.commit('addPost', await this.$services.timeline.fetchTimeline());
-  //   this.loading = false;
-  // },
-
   async created() {
     this.loading = true;
 
